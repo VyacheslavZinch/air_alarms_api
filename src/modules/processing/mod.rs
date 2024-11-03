@@ -11,7 +11,7 @@ pub mod processing {
     use redis::{Client, AsyncCommands, RedisResult};
     use log::{debug, info};
 
-    use crate::libs::{data_actions::data_actions::{deserialize_current_alarms_data, CurrentAlarm}, other_data::other_data::get_all_cities};
+    use crate::modules::{data_actions::data_actions::{deserialize_current_alarms_data, CurrentAlarm}, other_data::other_data::get_all_cities};
 
     ///Getting the Redis-host
     fn get_redis_host() -> String {
@@ -27,11 +27,19 @@ pub mod processing {
         pwd
     }
 
+    fn get_redis_usr() -> String {
+        dotenv().ok();
+        let usr = env::var("REDIS_USR").expect("THE REDIS USER IS UNAVAILABLE");
+        usr
+    }
+
+    
+
     /// Function for checking location alarm.
     /// To determine the location, its ID is used.
     pub async fn check_alarm(location_id: i32) -> bool {
 
-        let conn_str = format!("redis://:{}@{}:6379/0", get_redis_passwd(), get_redis_host());
+        let conn_str = format!("redis://{}:{}@{}:6380/0", get_redis_usr(), get_redis_passwd(), get_redis_host());
         let client = Client::open(conn_str);
         let conn = client.unwrap().get_multiplexed_async_connection().await;
 
@@ -49,7 +57,7 @@ pub mod processing {
     /// as parameters to the function.
     pub async fn set_alarm_status(location_id: i32, new_status: bool) {
 
-        let conn_str = format!("redis://:{}@{}:6379/0", get_redis_passwd(), get_redis_host());
+        let conn_str = format!("redis://{}:{}@{}:6380/0", get_redis_usr(), get_redis_passwd(), get_redis_host());
         let client = Client::open(conn_str);
         let mut conn = client.unwrap().get_multiplexed_async_connection().await.unwrap();
         let new_status = if new_status { "true".to_string() } else { "false".to_string() };

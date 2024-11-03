@@ -3,8 +3,8 @@ pub mod data_actions {
 
     use std::collections::HashSet;
     use log::debug;
-    use crate::libs::fetch_data::fetch_data::get_alerts;
-    use crate::libs::other_data::other_data::get_all_cities;
+    use crate::modules::fetch_data::fetch_data::get_alerts;
+    use crate::modules::other_data::other_data::get_all_cities;
 
 
     /// Struct fo representing info about of the alarm data

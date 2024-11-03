@@ -4,7 +4,7 @@ pub mod api_actions {
     use serde::Serialize;
     use tokio::task;
 
-    use crate::libs::{other_data::other_data::get_all_cities, processing::processing::check_alarm};
+    use crate::modules::{other_data::other_data::get_all_cities, processing::processing::check_alarm};
 
     ///Structure for storing data returned by a request
     #[derive(Debug, Serialize)]

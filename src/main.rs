@@ -1,11 +1,11 @@
-use libs::{api_actions::api_actions::{response_builder_for_one_location, response_builder_for_some_locations, ApiResponse}, other_data::other_data::{get_all_cities_as_json, RegionInfo}, processing::processing::update_data};
+use modules::{api_actions::api_actions::{response_builder_for_one_location, response_builder_for_some_locations, ApiResponse}, other_data::other_data::{get_all_cities_as_json, RegionInfo}, processing::processing::update_data};
 use std::collections::HashMap;
 use rocket::{
     serde::json::{json, Json, Value},
     catch, catchers, get, routes
 };
 
-mod libs {
+mod modules {
     pub mod fetch_data;
     pub mod processing;
     pub mod data_actions;
