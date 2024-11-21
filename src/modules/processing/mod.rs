@@ -13,14 +13,14 @@ pub mod processing {
 
     use crate::modules::{data_actions::data_actions::{deserialize_current_alarms_data, CurrentAlarm}, other_data::other_data::get_all_cities};
 
-    ///Getting the Redis-host
+    ///Get the Redis-host
     fn get_redis_host() -> String {
         dotenv().ok();
         let host = env::var("REDIS_HOST").expect("INCORRECT REDIS ADDRESS");
         host
     }
     
-    ///Getting password for Redis connection
+    ///Get the password for Redis connection
     fn get_redis_passwd() -> String {
         dotenv().ok();
         let pwd = env::var("REDIS_PASSWD").expect("THE REDIS PASSWORD IS UNAVAILABLE");
